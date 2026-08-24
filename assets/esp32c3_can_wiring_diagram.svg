@@ -1,0 +1,400 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 920" width="1400" height="920">
+  <defs>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Archivo+Black&amp;family=Barlow+Semi+Condensed:wght@700;800;900&amp;family=Space+Grotesk:wght@700&amp;family=Space+Mono:wght@700&amp;display=swap');
+      
+      .title { font-family: 'Archivo Black', Impact, system-ui, -apple-system, sans-serif; font-weight: 900; }
+      .sans { font-family: 'Space Grotesk', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-weight: 700; }
+      .mono { font-family: 'Space Mono', 'SF Mono', Consolas, 'Courier New', monospace; font-weight: 700; }
+      .badge { font-family: 'Barlow Semi Condensed', Impact, system-ui, sans-serif; font-weight: 900; letter-spacing: 0.8px; }
+      .pin-name { font-family: 'Space Mono', 'SF Mono', Consolas, monospace; font-size: 10.5px; font-weight: 700; }
+      .pill-text { font-family: 'Space Mono', 'SF Mono', Consolas, monospace; font-size: 10px; font-weight: 700; }
+    </style>
+    <pattern id="dotGrid" width="24" height="24" patternUnits="userSpaceOnUse">
+      <circle cx="3" cy="3" r="1.5" fill="#E5E7EB" />
+    </pattern>
+    <filter id="shadow" x="-5%" y="-5%" width="115%" height="115%">
+      <feDropShadow dx="4" dy="4" stdDeviation="0" flood-color="#000000" flood-opacity="1"/>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1400" height="920" fill="#F8FAFC" />
+  <rect width="1400" height="920" fill="url(#dotGrid)" />
+  
+  <!-- Outer Border Frame -->
+  <rect x="16" y="16" width="1368" height="888" rx="16" fill="none" stroke="#000000" stroke-width="3.5" />
+
+  <!-- ================= HEADER SECTION ================= -->
+  <g transform="translate(45, 38)">
+    <!-- Top Badges -->
+    <g transform="translate(0, 0)">
+      <rect x="0" y="0" width="130" height="26" rx="5" fill="#065F46" stroke="#000000" stroke-width="2" />
+      <text x="65" y="14" text-anchor="middle" dominant-baseline="central" fill="#FFFFFF" class="badge" font-size="12">HARDWARE ARCH</text>
+
+      <rect x="140" y="0" width="155" height="26" rx="5" fill="#FF5500" stroke="#000000" stroke-width="2" />
+      <text x="217.5" y="14" text-anchor="middle" dominant-baseline="central" fill="#FFFFFF" class="badge" font-size="12">ESP32-C3 + CAN BUS</text>
+
+      <rect x="305" y="0" width="125" height="26" rx="5" fill="#FFDD00" stroke="#000000" stroke-width="2" />
+      <text x="367.5" y="14" text-anchor="middle" dominant-baseline="central" fill="#000000" class="badge" font-size="12">BLE 5.0 STEALTH</text>
+    </g>
+
+    <!-- Main Title & Subtitle -->
+    <text x="0" y="62" fill="#000000" class="title" font-size="32" letter-spacing="-0.5px">
+      E-BIKE INLINE CAN-BUS SPEED MODULE
+    </text>
+    <text x="0" y="88" fill="#4B5563" class="sans" font-size="14.5">
+      ESP32-C3 SuperMini + SN65HVD230 CAN Transceiver + High-Voltage DC-DC Buck Step-Down
+    </text>
+  </g>
+
+  <!-- ================= WIRING BUS LINES ================= -->
+  
+  <!-- 1. VBAT 36-48V (Red) -->
+  <path d="M 155 310 L 270 310" stroke="#DC2626" stroke-width="4.5" stroke-linecap="round" />
+  
+  <!-- 2. GND Bus (Black) -->
+  <path d="M 155 365 L 270 365" stroke="#111827" stroke-width="4.5" stroke-linecap="round" />
+  <path d="M 480 365 L 600 365" stroke="#111827" stroke-width="4.5" stroke-linecap="round" />
+  <path d="M 860 365 L 980 365" stroke="#111827" stroke-width="4.5" stroke-linecap="round" />
+
+  <!-- 3. 5V Power (Orange) -->
+  <path d="M 480 310 L 600 310" stroke="#F97316" stroke-width="4.5" stroke-linecap="round" />
+
+  <!-- 4. 3.3V Logic Power (Yellow) -->
+  <path d="M 860 310 L 980 310" stroke="#EAB308" stroke-width="4.5" stroke-linecap="round" />
+
+  <!-- 5. CAN TX (Purple) -->
+  <path d="M 860 425 L 980 425" stroke="#8B5CF6" stroke-width="4" stroke-linecap="round" />
+
+  <!-- 6. CAN RX (Teal) -->
+  <path d="M 980 480 L 860 480" stroke="#0D9488" stroke-width="4" stroke-linecap="round" />
+
+  <!-- 7. CAN_H (Rose) -->
+  <path d="M 1180 480 L 1270 480" stroke="#E11D48" stroke-width="4.5" stroke-linecap="round" />
+
+  <!-- 8. CAN_L (Emerald) -->
+  <path d="M 1180 535 L 1270 535" stroke="#059669" stroke-width="4.5" stroke-linecap="round" />
+
+  <!-- 9. Key / Power Lock Pass-Through (Blue Dashed) -->
+  <path d="M 155 425 L 195 425 L 195 625 L 1235 625 L 1235 425 L 1270 425" fill="none" stroke="#2563EB" stroke-width="3.5" stroke-dasharray="6 4" stroke-linecap="round" />
+
+  <!-- ================= FLOATING WIRE PILL LABELS ================= -->
+  <!-- VBAT Pill -->
+  <g transform="translate(212, 296)">
+    <rect x="-38" y="0" width="76" height="20" rx="4" fill="#FEE2E2" stroke="#DC2626" stroke-width="1.5" />
+    <text x="0" y="11" text-anchor="middle" dominant-baseline="central" fill="#991B1B" class="pill-text">VBAT (42V)</text>
+  </g>
+
+  <!-- GND 1 Pill -->
+  <g transform="translate(212, 351)">
+    <rect x="-26" y="0" width="52" height="20" rx="4" fill="#F3F4F6" stroke="#111827" stroke-width="1.5" />
+    <text x="0" y="11" text-anchor="middle" dominant-baseline="central" fill="#111827" class="pill-text">GND</text>
+  </g>
+
+  <!-- 5V OUT Pill -->
+  <g transform="translate(540, 296)">
+    <rect x="-32" y="0" width="64" height="20" rx="4" fill="#FFEDD5" stroke="#F97316" stroke-width="1.5" />
+    <text x="0" y="11" text-anchor="middle" dominant-baseline="central" fill="#C2410C" class="pill-text">5.0V DC</text>
+  </g>
+
+  <!-- GND 2 Pill -->
+  <g transform="translate(540, 351)">
+    <rect x="-26" y="0" width="52" height="20" rx="4" fill="#F3F4F6" stroke="#111827" stroke-width="1.5" />
+    <text x="0" y="11" text-anchor="middle" dominant-baseline="central" fill="#111827" class="pill-text">GND</text>
+  </g>
+
+  <!-- 3.3V Logic Pill -->
+  <g transform="translate(920, 296)">
+    <rect x="-32" y="0" width="64" height="20" rx="4" fill="#FEF9C3" stroke="#CA8A04" stroke-width="1.5" />
+    <text x="0" y="11" text-anchor="middle" dominant-baseline="central" fill="#854D0E" class="pill-text">3.3V DC</text>
+  </g>
+
+  <!-- GND 3 Pill -->
+  <g transform="translate(920, 351)">
+    <rect x="-26" y="0" width="52" height="20" rx="4" fill="#F3F4F6" stroke="#111827" stroke-width="1.5" />
+    <text x="0" y="11" text-anchor="middle" dominant-baseline="central" fill="#111827" class="pill-text">GND</text>
+  </g>
+
+  <!-- CAN TX Pill -->
+  <g transform="translate(920, 411)">
+    <rect x="-40" y="0" width="80" height="20" rx="4" fill="#EDE9FE" stroke="#8B5CF6" stroke-width="1.5" />
+    <text x="0" y="11" text-anchor="middle" dominant-baseline="central" fill="#6D28D9" class="pill-text">GPIO 2 (TX)</text>
+  </g>
+
+  <!-- CAN RX Pill -->
+  <g transform="translate(920, 466)">
+    <rect x="-40" y="0" width="80" height="20" rx="4" fill="#CCFBF1" stroke="#0D9488" stroke-width="1.5" />
+    <text x="0" y="11" text-anchor="middle" dominant-baseline="central" fill="#0F766E" class="pill-text">GPIO 3 (RX)</text>
+  </g>
+
+  <!-- CAN_H Pill -->
+  <g transform="translate(1225, 466)">
+    <rect x="-26" y="0" width="52" height="20" rx="4" fill="#FFE4E6" stroke="#E11D48" stroke-width="1.5" />
+    <text x="0" y="11" text-anchor="middle" dominant-baseline="central" fill="#9F1239" class="pill-text">CAN_H</text>
+  </g>
+
+  <!-- CAN_L Pill -->
+  <g transform="translate(1225, 521)">
+    <rect x="-26" y="0" width="52" height="20" rx="4" fill="#D1FAE5" stroke="#059669" stroke-width="1.5" />
+    <text x="0" y="11" text-anchor="middle" dominant-baseline="central" fill="#065F46" class="pill-text">CAN_L</text>
+  </g>
+
+  <!-- Key Bypass Pill -->
+  <g transform="translate(715, 615)">
+    <rect x="-180" y="0" width="360" height="22" rx="4" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5" />
+    <text x="0" y="12" text-anchor="middle" dominant-baseline="central" fill="#1E40AF" class="pill-text">KEY / POWER-LOCK PASS-THROUGH (Power Switch Bypass)</text>
+  </g>
+
+
+  <!-- ================= MODULE 1: E-BIKE DISPLAY & BATTERY ================= -->
+  <g transform="translate(45, 190)">
+    <rect x="0" y="0" width="110" height="400" rx="12" fill="#FFFFFF" stroke="#000000" stroke-width="3" filter="url(#shadow)" />
+    
+    <!-- Header -->
+    <rect x="8" y="8" width="94" height="26" rx="4" fill="#000000" />
+    <text x="47" y="21" text-anchor="middle" dominant-baseline="central" fill="#FFFFFF" class="badge" font-size="10.5">BIKE HARNESS</text>
+    
+    <text x="47" y="52" text-anchor="middle" class="sans" font-size="12">Display Side</text>
+    <text x="47" y="68" text-anchor="middle" class="mono" font-size="10" fill="#6B7280">Julet 5-Pin</text>
+
+    <!-- Pins -->
+    <g transform="translate(110, 120)">
+      <circle cx="0" cy="0" r="7" fill="#DC2626" stroke="#000000" stroke-width="2" />
+      <text x="-12" y="1" text-anchor="end" dominant-baseline="central" class="pin-name" fill="#DC2626">VBAT</text>
+    </g>
+
+    <g transform="translate(110, 175)">
+      <circle cx="0" cy="0" r="7" fill="#111827" stroke="#000000" stroke-width="2" />
+      <text x="-12" y="1" text-anchor="end" dominant-baseline="central" class="pin-name" fill="#111827">GND</text>
+    </g>
+
+    <g transform="translate(110, 235)">
+      <circle cx="0" cy="0" r="7" fill="#2563EB" stroke="#000000" stroke-width="2" />
+      <text x="-12" y="1" text-anchor="end" dominant-baseline="central" class="pin-name" fill="#2563EB">KEY</text>
+    </g>
+
+    <g transform="translate(110, 290)">
+      <circle cx="0" cy="0" r="7" fill="#E11D48" stroke="#000000" stroke-width="2" />
+      <text x="-12" y="1" text-anchor="end" dominant-baseline="central" class="pin-name" fill="#E11D48">CAN_H</text>
+    </g>
+
+    <g transform="translate(110, 345)">
+      <circle cx="0" cy="0" r="7" fill="#059669" stroke="#000000" stroke-width="2" />
+      <text x="-12" y="1" text-anchor="end" dominant-baseline="central" class="pin-name" fill="#059669">CAN_L</text>
+    </g>
+  </g>
+
+
+  <!-- ================= MODULE 2: DC-DC STEP-DOWN BUCK ================= -->
+  <g transform="translate(270, 190)">
+    <rect x="0" y="0" width="210" height="400" rx="14" fill="#FFFFFF" stroke="#000000" stroke-width="3.5" filter="url(#shadow)" />
+    
+    <!-- Header -->
+    <rect x="12" y="12" width="186" height="28" rx="5" fill="#DC2626" stroke="#000000" stroke-width="1.5" />
+    <text x="105" y="27" text-anchor="middle" dominant-baseline="central" fill="#FFFFFF" class="badge" font-size="12.5">HIGH-VOLTAGE BUCK</text>
+    
+    <text x="105" y="58" text-anchor="middle" class="sans" font-size="14">MP4560 / XL7015</text>
+    <text x="105" y="74" text-anchor="middle" class="mono" font-size="10.5" fill="#6B7280">Input: 6V - 60V DC</text>
+
+    <!-- Component Diagram Box (Narrowed to avoid touching pin labels) -->
+    <rect x="42" y="96" width="126" height="96" rx="8" fill="#F8FAFC" stroke="#000000" stroke-width="1.5" stroke-dasharray="4 3" />
+    <text x="105" y="126" text-anchor="middle" class="mono" font-size="10.5" fill="#111827">Switching Inductor</text>
+    <text x="105" y="144" text-anchor="middle" class="mono" font-size="10.5" fill="#111827">&amp; 5V Regulator</text>
+    <text x="105" y="172" text-anchor="middle" class="badge" font-size="10" fill="#065F46">EFFICIENCY ~92%</text>
+
+    <!-- Left Pins (Input) -->
+    <g transform="translate(0, 120)">
+      <circle cx="0" cy="0" r="7" fill="#DC2626" stroke="#000000" stroke-width="2" />
+      <text x="11" y="1" dominant-baseline="central" class="pin-name" fill="#DC2626">VIN+</text>
+    </g>
+
+    <g transform="translate(0, 175)">
+      <circle cx="0" cy="0" r="7" fill="#111827" stroke="#000000" stroke-width="2" />
+      <text x="11" y="1" dominant-baseline="central" class="pin-name" fill="#111827">GND</text>
+    </g>
+
+    <!-- Right Pins (Output) -->
+    <g transform="translate(210, 120)">
+      <circle cx="0" cy="0" r="7" fill="#F97316" stroke="#000000" stroke-width="2" />
+      <text x="-11" y="1" text-anchor="end" dominant-baseline="central" class="pin-name" fill="#F97316">5V OUT</text>
+    </g>
+
+    <g transform="translate(210, 175)">
+      <circle cx="0" cy="0" r="7" fill="#111827" stroke="#000000" stroke-width="2" />
+      <text x="-11" y="1" text-anchor="end" dominant-baseline="central" class="pin-name" fill="#111827">GND</text>
+    </g>
+
+    <!-- Size Badge -->
+    <rect x="20" y="348" width="170" height="28" rx="6" fill="#F1F5F9" stroke="#000000" stroke-width="1.5" />
+    <text x="105" y="363" text-anchor="middle" dominant-baseline="central" class="mono" font-size="11">Size: 30 x 17 mm</text>
+  </g>
+
+
+  <!-- ================= MODULE 3: ESP32-C3 SUPERMINI ================= -->
+  <g transform="translate(600, 175)">
+    <rect x="0" y="0" width="260" height="425" rx="16" fill="#FFFFFF" stroke="#000000" stroke-width="4" filter="url(#shadow)" />
+    
+    <!-- Header -->
+    <rect x="12" y="12" width="236" height="32" rx="6" fill="#FF5500" stroke="#000000" stroke-width="1.5" />
+    <text x="130" y="29" text-anchor="middle" dominant-baseline="central" fill="#FFFFFF" class="badge" font-size="14">ESP32-C3 SUPERMINI</text>
+
+    <!-- Specs Subtitle -->
+    <text x="130" y="62" text-anchor="middle" class="sans" font-size="15">160MHz RISC-V Core</text>
+    <text x="130" y="78" text-anchor="middle" class="mono" font-size="10.5" fill="#6B7280">TWAI Controller + BLE 5.0</text>
+
+    <!-- Bluetooth Antenna Box (At Bottom) -->
+    <rect x="20" y="335" width="220" height="34" rx="6" fill="#FFDD00" stroke="#000000" stroke-width="1.5" />
+    <text x="130" y="353" text-anchor="middle" dominant-baseline="central" class="badge" font-size="12" fill="#000000">📶 ONBOARD BLE ANTENNA</text>
+
+    <!-- Left Pins (Power Input) -->
+    <g transform="translate(0, 135)">
+      <circle cx="0" cy="0" r="7" fill="#F97316" stroke="#000000" stroke-width="2" />
+      <text x="11" y="1" dominant-baseline="central" class="pin-name" fill="#F97316">5V / VIN</text>
+    </g>
+
+    <g transform="translate(0, 190)">
+      <circle cx="0" cy="0" r="7" fill="#111827" stroke="#000000" stroke-width="2" />
+      <text x="11" y="1" dominant-baseline="central" class="pin-name" fill="#111827">GND</text>
+    </g>
+
+    <!-- Right Pins (To CAN Transceiver) -->
+    <g transform="translate(260, 135)">
+      <circle cx="0" cy="0" r="7" fill="#EAB308" stroke="#000000" stroke-width="2" />
+      <text x="-11" y="1" text-anchor="end" dominant-baseline="central" class="pin-name" fill="#CA8A04">3V3 OUT</text>
+    </g>
+
+    <g transform="translate(260, 190)">
+      <circle cx="0" cy="0" r="7" fill="#111827" stroke="#000000" stroke-width="2" />
+      <text x="-11" y="1" text-anchor="end" dominant-baseline="central" class="pin-name" fill="#111827">GND</text>
+    </g>
+
+    <g transform="translate(260, 250)">
+      <circle cx="0" cy="0" r="7" fill="#8B5CF6" stroke="#000000" stroke-width="2" />
+      <text x="-11" y="1" text-anchor="end" dominant-baseline="central" class="pin-name" fill="#7C3AED">GPIO 2 (TX)</text>
+    </g>
+
+    <g transform="translate(260, 305)">
+      <circle cx="0" cy="0" r="7" fill="#0D9488" stroke="#000000" stroke-width="2" />
+      <text x="-11" y="1" text-anchor="end" dominant-baseline="central" class="pin-name" fill="#0D9488">GPIO 3 (RX)</text>
+    </g>
+
+    <!-- Size Badge -->
+    <rect x="20" y="380" width="220" height="28" rx="6" fill="#F8FAFC" stroke="#000000" stroke-width="1.5" />
+    <text x="130" y="395" text-anchor="middle" dominant-baseline="central" class="mono" font-size="11">Size: 22.5 x 18 mm</text>
+  </g>
+
+
+  <!-- ================= MODULE 4: SN65HVD230 CAN BOARD ================= -->
+  <g transform="translate(980, 190)">
+    <rect x="0" y="0" width="200" height="400" rx="14" fill="#FFFFFF" stroke="#000000" stroke-width="3.5" filter="url(#shadow)" />
+    
+    <!-- Header -->
+    <rect x="10" y="12" width="180" height="28" rx="5" fill="#065F46" stroke="#000000" stroke-width="1.5" />
+    <text x="100" y="27" text-anchor="middle" dominant-baseline="central" fill="#FFFFFF" class="badge" font-size="12.5">CAN TRANSCEIVER</text>
+    
+    <text x="100" y="58" text-anchor="middle" class="sans" font-size="14">SN65HVD230</text>
+    <text x="100" y="74" text-anchor="middle" class="mono" font-size="10.5" fill="#6B7280">3.3V Logic ↔ Diff CAN</text>
+
+    <!-- Termination Resistor Jumper Box (Narrowed and centered to avoid touching pin labels) -->
+    <rect x="52" y="96" width="102" height="75" rx="7" fill="#F8FAFC" stroke="#000000" stroke-width="1.5" />
+    <text x="103" y="116" text-anchor="middle" class="mono" font-size="10" fill="#111827">120Ω Term</text>
+    <text x="103" y="130" text-anchor="middle" class="mono" font-size="10" fill="#111827">Resistor</text>
+    <rect x="58" y="142" width="90" height="20" rx="3" fill="#065F46" stroke="#000000" stroke-width="1" />
+    <text x="103" y="153" text-anchor="middle" dominant-baseline="central" class="badge" font-size="9.5" fill="#FFFFFF">ACTIVE</text>
+
+    <!-- Left Pins (From ESP32) -->
+    <g transform="translate(0, 120)">
+      <circle cx="0" cy="0" r="7" fill="#EAB308" stroke="#000000" stroke-width="2" />
+      <text x="11" y="1" dominant-baseline="central" class="pin-name" fill="#854D0E">VCC</text>
+    </g>
+
+    <g transform="translate(0, 175)">
+      <circle cx="0" cy="0" r="7" fill="#111827" stroke="#000000" stroke-width="2" />
+      <text x="11" y="1" dominant-baseline="central" class="pin-name" fill="#111827">GND</text>
+    </g>
+
+    <g transform="translate(0, 235)">
+      <circle cx="0" cy="0" r="7" fill="#8B5CF6" stroke="#000000" stroke-width="2" />
+      <text x="11" y="1" dominant-baseline="central" class="pin-name" fill="#7C3AED">CTX</text>
+    </g>
+
+    <g transform="translate(0, 290)">
+      <circle cx="0" cy="0" r="7" fill="#0D9488" stroke="#000000" stroke-width="2" />
+      <text x="11" y="1" dominant-baseline="central" class="pin-name" fill="#0D9488">CRX</text>
+    </g>
+
+    <!-- Right Pins (To E-Bike CAN Bus) -->
+    <g transform="translate(200, 290)">
+      <circle cx="0" cy="0" r="7" fill="#E11D48" stroke="#000000" stroke-width="2" />
+      <text x="-11" y="1" text-anchor="end" dominant-baseline="central" class="pin-name" fill="#E11D48">CAN_H</text>
+    </g>
+
+    <g transform="translate(200, 345)">
+      <circle cx="0" cy="0" r="7" fill="#059669" stroke="#000000" stroke-width="2" />
+      <text x="-11" y="1" text-anchor="end" dominant-baseline="central" class="pin-name" fill="#059669">CAN_L</text>
+    </g>
+
+    <!-- Size Badge -->
+    <rect x="15" y="348" width="170" height="28" rx="6" fill="#F1F5F9" stroke="#000000" stroke-width="1.5" />
+    <text x="100" y="363" text-anchor="middle" dominant-baseline="central" class="mono" font-size="11">Size: 15 x 11 mm</text>
+  </g>
+
+
+  <!-- ================= MODULE 5: TO MOTOR CONTROLLER ================= -->
+  <g transform="translate(1270, 190)">
+    <rect x="0" y="0" width="85" height="400" rx="12" fill="#FFFFFF" stroke="#000000" stroke-width="3" filter="url(#shadow)" />
+    
+    <!-- Header -->
+    <rect x="6" y="8" width="73" height="26" rx="4" fill="#000000" />
+    <text x="42.5" y="21" text-anchor="middle" dominant-baseline="central" fill="#FFFFFF" class="badge" font-size="10">TO MOTOR</text>
+
+    <text x="42.5" y="52" text-anchor="middle" class="sans" font-size="11">Controller</text>
+    <text x="42.5" y="68" text-anchor="middle" class="mono" font-size="10" fill="#6B7280">CAN Line</text>
+
+    <!-- Pins (Left side) -->
+    <g transform="translate(0, 235)">
+      <circle cx="0" cy="0" r="7" fill="#2563EB" stroke="#000000" stroke-width="2" />
+      <text x="11" y="1" dominant-baseline="central" class="pin-name" fill="#2563EB">KEY</text>
+    </g>
+
+    <g transform="translate(0, 290)">
+      <circle cx="0" cy="0" r="7" fill="#E11D48" stroke="#000000" stroke-width="2" />
+      <text x="11" y="1" dominant-baseline="central" class="pin-name" fill="#E11D48">CAN_H</text>
+    </g>
+
+    <g transform="translate(0, 345)">
+      <circle cx="0" cy="0" r="7" fill="#059669" stroke="#000000" stroke-width="2" />
+      <text x="11" y="1" dominant-baseline="central" class="pin-name" fill="#059669">CAN_L</text>
+    </g>
+  </g>
+
+
+  <!-- ================= BOTTOM FEATURE CARDS ================= -->
+  <g transform="translate(45, 680)">
+    <!-- Card 1: Dimensions -->
+    <g transform="translate(0, 0)">
+      <rect x="0" y="0" width="380" height="90" rx="10" fill="#FFFFFF" stroke="#000000" stroke-width="2.5" filter="url(#shadow)" />
+      <text x="20" y="25" class="badge" font-size="13" fill="#FF5500">📏 TOTAL STACK DIMENSIONS</text>
+      <text x="20" y="52" class="sans" font-size="16">~32 mm × 18 mm × 12 mm</text>
+      <text x="20" y="72" class="mono" font-size="11" fill="#64748B">Fits inside 25mm heat-shrink sleeve inline</text>
+    </g>
+
+    <!-- Card 2: Speed Modification & Logic -->
+    <g transform="translate(425, 0)">
+      <rect x="0" y="0" width="460" height="90" rx="10" fill="#FFFFFF" stroke="#000000" stroke-width="2.5" filter="url(#shadow)" />
+      <text x="20" y="25" class="badge" font-size="13" fill="#065F46">⚡ SPEED MODIFICATION &amp; CAN ARBITRATION</text>
+      <text x="20" y="52" class="sans" font-size="16">250 kbps / 500 kbps CAN 2.0B + Dynamic Spoofing</text>
+      <text x="20" y="72" class="mono" font-size="11" fill="#64748B">Overrides 25 km/h limit frame on-the-fly via TWAI filter</text>
+    </g>
+
+    <!-- Card 3: BLE App Interface -->
+    <g transform="translate(930, 0)">
+      <rect x="0" y="0" width="380" height="90" rx="10" fill="#FFFFFF" stroke="#000000" stroke-width="2.5" filter="url(#shadow)" />
+      <text x="20" y="25" class="badge" font-size="13" fill="#2563EB">📱 STEALTH BLE PHONE INTERFACE</text>
+      <text x="20" y="52" class="sans" font-size="16">Instant 25 ↔ 33+ km/h Mode Switch</text>
+      <text x="20" y="72" class="mono" font-size="11" fill="#64748B">Cold boots in EN15194 25km/h compliance mode</text>
+    </g>
+  </g>
+
+</svg>
