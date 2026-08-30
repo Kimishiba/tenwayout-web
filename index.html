@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>TenWayOut ⚡ Universal E-Bike Speed Unlock Bridge & Telemetry Proxy</title>
   <meta name="description" content="Non-destructive Man-In-The-Middle (MITM) inline UART & CAN-bus speed unlock bridge for the Tenways CGO800S e-bike. Powered by ESP32-C3 with Web Bluetooth control.">
-  <meta name="theme-color" content="#0a0a0c">
+  <meta name="theme-color" content="#0A0A0A">
   
   <!-- Open Graph -->
   <meta property="og:title" content="TenWayOut ⚡ Universal E-Bike Speed Unlock Bridge">
@@ -15,130 +15,170 @@
 
   <!-- Favicon -->
   <link rel="icon" type="image/svg+xml" href="assets/logo.svg">
+  <link rel="apple-touch-icon" href="assets/logo.svg">
   
   <!-- Stylesheets -->
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <!-- Sticky Top Navigation -->
-  <header class="navbar">
-    <div class="container nav-container">
-      <a href="#" class="nav-brand">
-        <img src="assets/logo.svg" alt="TenWayOut Logo" class="nav-logo">
-        <span class="brand-text">TENWAY<span>OUT</span></span>
-      </a>
+  <!-- Dot Grid Matrix Canvas Background -->
+  <div class="dot-grid"></div>
 
-      <ul class="nav-links">
-        <li><a href="#overview">Overview</a></li>
-        <li><a href="#architecture">Architecture</a></li>
-        <li><a href="#web-app">Web BLE App</a></li>
-        <li><a href="#wiring">Wiring &amp; Pinout</a></li>
-        <li><a href="#bom">BOM (.NL)</a></li>
-        <li><a href="#gestures">Gestures</a></li>
-        <li><a href="#faq">FAQ</a></li>
-      </ul>
+  <!-- Floating Doodle Clear Control Button -->
+  <div class="doodle-ctl" id="doodle-ctl">
+    <button id="clear-doodle" type="button">🧹 CLEAR SKETCH</button>
+  </div>
 
-      <a href="#web-app" class="nav-cta">⚡ Open Web App</a>
+  <!-- Top Navigation Bar -->
+  <nav class="navbar">
+    <a href="#" class="logo">
+      tenway<span class="dot">·</span><span class="logo-out">out</span> ⚡
+    </a>
+
+    <div class="nav-links">
+      <a href="#overview">Overview</a>
+      <a href="#architecture">Architecture</a>
+      <a href="#web-app">Web BLE App</a>
+      <a href="#wiring">Wiring</a>
+      <a href="#bom">BOM (.NL)</a>
+      <a href="#gestures">Gestures</a>
+      <a href="#faq">FAQ</a>
+      <a href="https://github.com/Kimishiba/tenways-cgo800s-mitm" target="_blank">GitHub</a>
+      <a class="nav-cta" href="#web-app">⚡ Connect BLE</a>
     </div>
-  </header>
+  </nav>
 
-  <!-- Hero Section -->
   <main>
-    <section class="hero-section" id="overview">
-      <div class="container">
+    <!-- Hero Section (agentdomains.co Split Style) -->
+    <section class="hero" id="overview">
+      <div class="hero-text">
+        <h1 class="hero-title">Speed unlock<br><span class="g">for e-bikes.</span></h1>
         
-        <!-- Neo-Brutalist Master Hero Banner Frame -->
-        <div class="hero-banner-frame">
-          <div class="hero-banner-inner">
-            
-            <!-- Left Card -->
-            <div class="hero-main-card">
-              <div>
-                <div class="hero-badge-row">
-                  <span class="pill-badge pill-green">⚡ SPEED UNLOCKED</span>
-                  <span class="pill-badge pill-orange">UART / CAN-BUS</span>
-                  <span class="pill-badge pill-yellow">BLUETOOTH BLE 5.0</span>
-                </div>
+        <p class="hero-subtitle">
+          Your e-bike just got de-restricted. Raise the assisted cutoff from <b>25 km/h → 33+ km/h</b> in one inline harness. Zero wires cut.
+        </p>
 
-                <h1 class="hero-title">TENWAY<span>OUT</span></h1>
-                <div class="title-underline"></div>
+        <div class="domain-search">
+          <div class="metadata">// Set target speed limit (km/h)</div>
+          <div class="input-wrapper" id="input-wrapper">
+            <input type="number" id="speed-input" value="33" min="20" max="45" placeholder="33" aria-label="Target speed limit">
+            <span class="suffix" id="speed-suffix" title="Click to toggle units">KM/H</span>
+          </div>
+          
+          <div class="check" id="check" aria-live="polite">
+            <span class="ok">⚡ Limit Set: 33.0 km/h (US Spec)</span> — CRC: <code>0x7E</code> calculated on-the-fly 🤖<br>
+            <code class="cmd" id="cmd-snippet" title="Click to copy">pio run -e esp32-c3-supermini -t upload</code>
+          </div>
 
-                <div class="hero-subtitle">Universal Inline Speed Bridge &amp; Telemetry Proxy</div>
-                <div class="hero-specs-copy">
-                  Raise assisted cutoff from <strong>25 km/h → 33 km/h</strong> (US Spec).<br>
-                  Zero wire cutting. Non-destructive inline T-harness installation.
-                </div>
-              </div>
-
-              <div style="display: flex; gap: 12px; flex-wrap: wrap;">
-                <a href="#web-app" class="btn btn-primary">⚡ Connect Bike (BLE)</a>
-                <a href="#wiring" class="btn btn-secondary">🔌 View Wiring Diagram</a>
-              </div>
-            </div>
-
-            <!-- Right Emblem Card -->
-            <div class="hero-emblem-card">
-              <div class="emblem-badge-row">
-                <span class="pill-badge pill-dark">INLINE // MITM</span>
-                <span class="pill-badge pill-white">ESP32-C3 160MHz</span>
-              </div>
-
-              <img src="assets/logo.svg" alt="TenWayOut 5-Spoke Precision Aero Logo" class="hero-logo-img">
-
-              <div class="hero-emblem-ribbon">
-                LIMIT: 25 KM/H → 33+ KM/H
-              </div>
-            </div>
-
+          <div class="btn-row">
+            <a href="#web-app" class="btn">⚡ CONNECT BIKE (BLE) →</a>
+            <a href="https://github.com/Kimishiba/tenways-cgo800s-mitm" target="_blank" class="btn ghost">★ GITHUB REPO</a>
           </div>
         </div>
+      </div>
 
-        <!-- Metrics Grid -->
-        <div class="metrics-grid">
-          <div class="metric-card">
-            <div class="metric-value">33 km/h</div>
-            <div class="metric-label">Max Assist Threshold</div>
-            <div class="metric-desc">Upgraded from EU 25 km/h limiter</div>
-          </div>
-          <div class="metric-card">
-            <div class="metric-value">0 Wires Cut</div>
-            <div class="metric-label">100% Reversible</div>
-            <div class="metric-desc">Plug-and-play Julet 5-pin T-harness</div>
-          </div>
-          <div class="metric-card">
-            <div class="metric-value">160 MHz</div>
-            <div class="metric-label">ESP32-C3 RISC-V</div>
-            <div class="metric-desc">TWAI CAN-bus &amp; Dual UART proxy</div>
-          </div>
-          <div class="metric-card">
-            <div class="metric-value">100% Stealth</div>
-            <div class="metric-label">Cold-Boot 25 km/h Safe</div>
-            <div class="metric-desc">Passes rollentestbank inspections</div>
-          </div>
+      <!-- Right Side: Interactive Sketch/Doodle Zone & Tags -->
+      <div class="examples" id="examples" aria-label="Interactive sketch zone. Draw here with pencil!">
+        <div class="tag tag-1"><span class="dom">limit: 33.0 km/h [US SPEC]</span></div>
+        
+        <div class="hero-emblem-center">
+          <img src="assets/logo.svg" alt="TenWayOut 5-Spoke Precision Aero Mark" class="hero-logo-aero">
         </div>
 
+        <div class="tag tag-2"><span class="dom">twai can // uart 9600 8N1</span></div>
+        <div class="tag tag-3"><span class="dom">cold-boot: 25 km/h safe</span></div>
+
+        <!-- HTML5 Doodle Canvas Layer -->
+        <canvas id="doodle"></canvas>
+      </div>
+    </section>
+
+    <!-- Terminal Command Band -->
+    <div class="term">
+      <div class="term-inner">
+        <span class="c"># 1. Flash TenWayOut firmware to ESP32-C3 SuperMini</span><br>
+        <span class="p">$</span> pio run --target upload --environment esp32-c3-supermini<br><br>
+        <span class="c"># 2. Inline MITM transparent serial proxy online</span><br>
+        <span class="p">$</span> tenwayout-proxy --mode intercept --target 33kmh --interface twai-can<br>
+        <span class="g">✓ Intercepting UART 0x59 telemetry: spoofing limit byte 0x21 (33 km/h), CRC 0x7E verified</span>
+      </div>
+    </div>
+
+    <!-- Metrics Grid -->
+    <div class="metrics-grid">
+      <div class="metric-card">
+        <div class="metric-value">33 km/h</div>
+        <div class="metric-label">Max Assist Threshold</div>
+        <div class="metric-desc">Upgraded from EU 25 km/h factory limiter</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-value">0 Wires Cut</div>
+        <div class="metric-label">100% Reversible</div>
+        <div class="metric-desc">Plug-and-play Julet 5-pin T-harness</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-value">160 MHz</div>
+        <div class="metric-label">ESP32-C3 RISC-V</div>
+        <div class="metric-desc">TWAI CAN-bus &amp; Dual UART serial proxy</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-value">100% Stealth</div>
+        <div class="metric-label">Cold-Boot 25 km/h Safe</div>
+        <div class="metric-desc">Passes roller test bench (Rollentestbank) inspections</div>
+      </div>
+    </div>
+
+    <!-- Asymmetric Feature Highlights (agentdomains 4-card grid) -->
+    <section class="container section">
+      <div class="metadata">// Features &amp; Engineering</div>
+      <h2>Engineered for <span class="g">Speed &amp; Stealth</span></h2>
+      
+      <div class="features">
+        <div class="feature-card">
+          <div class="metadata">01 / HARDWARE</div>
+          <h3>One Inline Cable</h3>
+          <p><code>5-pin Julet T-harness</code> snaps inline between your handlebar display and motor controller. Unplug anytime to return to 100% factory original state.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="metadata" style="color:var(--lime)">02 / STEALTH</div>
+          <h3>Cold-Boot Safe</h3>
+          <p><code>boot_mode = LEGAL_25KMH</code> defaults on power-up for roller test bench inspections. Unlock on-demand via smartphone Web BLE or handlebar brake gesture.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="metadata">03 / TELEMETRY</div>
+          <h3>Real Speed Display</h3>
+          <p>ESP32-C3 dynamically recalculates <code>0x59 UART checksums</code> so your handlebar OLED display shows true GPS speed while assisting up to 33+ km/h.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="metadata">04 / WIRELESS</div>
+          <h3>Web BLE Companion</h3>
+          <p>No App Store installation needed. Open <code>kimishiba.github.io/tenwayout-web</code> in Chrome to configure speed limits and read live telemetry.</p>
+        </div>
       </div>
     </section>
 
     <!-- Architecture & Signal Flow Section -->
-    <section class="section" id="architecture">
+    <section class="section" id="architecture" style="background: rgba(239, 252, 245, 0.4);">
       <div class="container">
         <div class="section-header">
-          <span class="pill-badge pill-orange section-tag">HOW IT WORKS</span>
-          <h2>Inline Man-In-The-Middle Architecture</h2>
+          <span class="pill-badge pill-orange section-tag">SIGNAL ARCHITECTURE</span>
+          <h2>Inline MITM Packet Flow</h2>
           <p>
-            TenWayOut bridges the serial communication lines between the handlebar display (HMI) and the Mivice motor controller. It dynamically modifies speed cutoff limits in real-time without modifying motor controller firmware.
+            TenWayOut intercepts bidirectional serial packets between the handlebar display (HMI) and the Mivice motor controller, adjusting cutoff limits without flashing motor firmware.
           </p>
         </div>
 
-        <!-- Interactive Visualizer -->
+        <!-- Interactive Visualizer Container -->
         <div class="visualizer-container">
           <div class="flow-controls">
-            <button class="mode-toggle-btn" id="btnFlowLegal" onclick="setMitmVisualizerMode('legal')">
+            <button class="mode-toggle-btn" id="btnFlowLegal" type="button">
               🛡️ Legal Mode (25 km/h Pass-Through)
             </button>
-            <button class="mode-toggle-btn active" id="btnFlowUnlocked" onclick="setMitmVisualizerMode('unlocked')">
+            <button class="mode-toggle-btn active" id="btnFlowUnlocked" type="button">
               ⚡ Unlocked Mode (33 km/h Dynamic Spoofing)
             </button>
           </div>
@@ -171,7 +211,7 @@
               <div class="wire-line">
                 <div class="wire-packet" style="animation-delay: 1s;"></div>
               </div>
-              <div class="wire-label">Modified Bus Data</div>
+              <div class="wire-label">Modified Telemetry</div>
             </div>
 
             <!-- Node 3: Motor Controller -->
@@ -182,11 +222,11 @@
             </div>
           </div>
 
-          <div style="text-align: center; margin-top: 20px; font-family: var(--font-sans); color: var(--text-secondary);" id="mitmDescription">
+          <div style="text-align: center; margin-top: 20px; font-family: var(--font-sans); color: var(--text-charcoal);" id="mitmDescription">
             <strong>Active Interception:</strong> ESP32-C3 dynamically rewrites limit byte to <strong>33.0 km/h</strong> (0x21) and recalculates packet checksum.
           </div>
 
-          <!-- Packet Inspector -->
+          <!-- Live Packet Inspector -->
           <div class="packet-inspector">
             <div class="packet-header">
               <span id="packetModeLabel">MODE: ACTIVE TELEMETRY SPOOFING (33 km/h UNLOCKED)</span>
@@ -207,13 +247,13 @@
     </section>
 
     <!-- Web BLE Companion & Simulator Section -->
-    <section class="section" id="web-app" style="background: rgba(18, 19, 23, 0.6);">
+    <section class="section" id="web-app">
       <div class="container">
         <div class="section-header">
-          <span class="pill-badge pill-yellow section-tag">LIVE WEB BLUETOOTH</span>
-          <h2>Wireless Smartphone Companion App</h2>
+          <span class="pill-badge pill-lime section-tag">LIVE WEB BLUETOOTH</span>
+          <h2>Wireless Smartphone Companion</h2>
           <p>
-            No App Store download required. Using standard <strong>Web Bluetooth (HTML5)</strong>, configure your speed cutoff directly from Chrome on Android, Mac, or PC, or Bluefy on iOS.
+            Connect directly to your bike over <strong>Web Bluetooth (BLE 5.0)</strong> with Chrome on Android, Mac, or PC, or Bluefy on iOS.
           </p>
         </div>
 
@@ -227,17 +267,17 @@
               <div class="ble-status-row">
                 <div class="status-indicator">
                   <div class="status-dot simulated" id="statusDot"></div>
-                  <span id="statusText">Disconnected (Simulation Active)</span>
+                  <span id="statusText">Disconnected (Sim Active)</span>
                 </div>
-                <button id="btnSimToggle" style="background:none; border:none; color:var(--brand-orange); font-size:12px; cursor:pointer; font-weight:700;">🧪 Toggle Sim</button>
+                <button id="btnSimToggle" style="background:none; border:none; color:var(--energy-d); font-size:12px; cursor:pointer; font-weight:700; font-family:var(--font-mono);">🧪 Toggle Sim</button>
               </div>
 
-              <button class="btn btn-primary" id="btnBleConnect" style="width: 100%; margin-bottom: 16px;">
-                Connect Bike via Bluetooth
+              <button class="btn" id="btnBleConnect" style="width: 100%; margin-top: 0;">
+                ⚡ Connect Bike via BLE
               </button>
 
               <div class="speedometer-display">
-                <div style="font-size: 12px; font-family: var(--font-mono); color: var(--text-muted); margin-bottom: 4px;">ESTIMATED ASSISTED SPEED</div>
+                <div class="metadata" style="color: #A0A0A0; margin-bottom: 4px;">ESTIMATED ASSISTED SPEED</div>
                 <div class="current-speed" id="liveSpeedValue">25.0</div>
                 <div class="speed-unit">KM/H</div>
               </div>
@@ -256,7 +296,7 @@
               <div class="slider-wrapper">
                 <div class="slider-header">
                   <span>Custom Speed Threshold</span>
-                  <span id="sliderValue" style="color: var(--brand-orange); font-weight: 700;">33 km/h</span>
+                  <span id="sliderValue" style="color: var(--energy-d); font-weight: 700;">33 km/h</span>
                 </div>
                 <input type="range" class="custom-range" id="speedSlider" min="20" max="38" value="33">
               </div>
@@ -264,19 +304,19 @@
               <div class="telemetry-mini-grid">
                 <div class="telemetry-pill">
                   <span>MOTOR:</span>
-                  <strong id="liveWattsValue" style="color:var(--brand-yellow)">185 W</strong>
+                  <strong id="liveWattsValue" style="color:var(--speed-orange)">185 W</strong>
                 </div>
                 <div class="telemetry-pill">
                   <span>BATTERY:</span>
-                  <strong id="liveVoltsValue" style="color:#ffffff">40.8 V</strong>
+                  <strong id="liveVoltsValue" style="color:var(--ink)">40.8 V</strong>
                 </div>
                 <div class="telemetry-pill">
                   <span>STATE:</span>
-                  <strong id="liveAssistValue" style="color:var(--brand-green-bright)">ASSISTING</strong>
+                  <strong id="liveAssistValue" style="color:var(--energy-d)">ASSISTING</strong>
                 </div>
                 <div class="telemetry-pill">
-                  <span>INTERFACE:</span>
-                  <strong style="color:var(--brand-orange)">TWAI / UART</strong>
+                  <span>BUS:</span>
+                  <strong style="color:var(--energy)">TWAI / UART</strong>
                 </div>
               </div>
             </div>
@@ -287,7 +327,7 @@
             <div style="margin-bottom: 24px;">
               <h3 style="margin-bottom: 8px;">Instant Browser Connectivity</h3>
               <p>
-                Connect directly to your bike over Bluetooth LE without installing third-party apps. All settings are securely written to the ESP32-C3 onboard non-volatile flash memory (NVS).
+                Zero app store downloads. Pair directly over Bluetooth LE. All speed thresholds and boot preferences are saved into ESP32-C3 onboard non-volatile flash (NVS).
               </p>
             </div>
 
@@ -299,7 +339,7 @@
             </div>
 
             <div style="margin-bottom: 24px;">
-              <h3 style="margin-bottom: 8px;">Persistent Hardware EEPROM</h3>
+              <h3 style="margin-bottom: 8px;">Persistent EEPROM Config</h3>
               <p>
                 Choose whether you want your bike to always start in Legal Mode on power-up (stealth default) or remember your last unlocked setting across battery power cycles.
               </p>
@@ -311,13 +351,13 @@
     </section>
 
     <!-- Wiring & Pinout Guide Section -->
-    <section class="section" id="wiring">
+    <section class="section" id="wiring" style="background: rgba(239, 252, 245, 0.3);">
       <div class="container">
         <div class="section-header">
           <span class="pill-badge pill-green section-tag">HARDWARE INTERCONNECT</span>
           <h2>Wiring Topology &amp; Pinout</h2>
           <p>
-            The module is designed with standard 5-pin Julet waterproof connectors for clean, reversible inline installation.
+            Built for standard 5-pin Julet waterproof connectors for clean, reversible inline installation.
           </p>
         </div>
 
@@ -325,8 +365,8 @@
           <!-- Vector Schematic Card -->
           <div class="wiring-diagram-card">
             <img src="assets/esp32c3_can_wiring_diagram.svg" alt="ESP32-C3 and CAN Wiring Schematic">
-            <div style="font-family: var(--font-mono); font-size: 0.8rem; color: var(--text-charcoal); margin-top: 12px;">
-              📐 Complete ESP32-C3 SuperMini + SN65HVD230 CAN Module Wiring Map
+            <div style="font-family: var(--font-mono); font-size: 0.82rem; color: var(--text-charcoal); margin-top: 12px;">
+              📐 ESP32-C3 SuperMini + SN65HVD230 CAN Module Wiring Map
             </div>
           </div>
 
@@ -358,7 +398,7 @@
                   <td>Display Passthrough</td>
                 </tr>
                 <tr>
-                  <td><span class="pin-wire-color" style="background:#10b981;"></span> Pin 4 (Green)</td>
+                  <td><span class="pin-wire-color" style="background:#00CC74;"></span> Pin 4 (Green)</td>
                   <td><strong>Display TX / CAN_H</strong></td>
                   <td>ESP32 GPIO 4 / CAN_H</td>
                 </tr>
@@ -370,7 +410,7 @@
               </tbody>
             </table>
             <div style="font-family: var(--font-mono); font-size: 0.78rem; color: var(--text-muted); margin-top: 16px;">
-              ⚡ Stack size: <strong>32mm × 18mm × 12mm</strong> (Easily fits inside standard 25mm frame tube or cable wrap).
+              ⚡ Enclosure size: <strong>32mm × 18mm × 12mm</strong> (Fits inside standard 25mm frame tube or cable wrap).
             </div>
           </div>
         </div>
@@ -379,7 +419,7 @@
     </section>
 
     <!-- Bill of Materials (BOM) Section -->
-    <section class="section" id="bom" style="background: rgba(18, 19, 23, 0.6);">
+    <section class="section" id="bom">
       <div class="container">
         <div class="section-header">
           <span class="pill-badge pill-orange section-tag">SOURCING &amp; HARDWARE</span>
@@ -402,7 +442,7 @@
             <tbody>
               <tr>
                 <td><strong>ESP32-C3 SuperMini</strong></td>
-                <td>160MHz RISC-V, Built-in BLE 5.0, Wi-Fi, TWAI CAN controller ($22.5 \times 18\text{ mm}$)</td>
+                <td>160MHz RISC-V, Built-in BLE 5.0, Wi-Fi, TWAI CAN controller</td>
                 <td><strong>~€2.50</strong></td>
                 <td>
                   <a href="https://www.tinytronics.nl/nl/development-boards/microcontroller-boards/overige-architecturen/esp32-c3" target="_blank" class="vendor-tag">TinyTronics.nl</a>
@@ -412,7 +452,7 @@
               </tr>
               <tr>
                 <td><strong>SN65HVD230 CAN Board</strong></td>
-                <td>3.3V CAN transceiver IC with onboard 120Ω termination ($15 \times 11\text{ mm}$)</td>
+                <td>3.3V CAN transceiver IC with onboard 120Ω termination</td>
                 <td><strong>~€1.20</strong></td>
                 <td>
                   <a href="https://www.tinytronics.nl/nl/communicatie/can" target="_blank" class="vendor-tag">TinyTronics.nl</a>
@@ -422,7 +462,7 @@
               </tr>
               <tr>
                 <td><strong>MP4560 / XL7015 DC-DC Buck</strong></td>
-                <td>High-voltage step-down converter (36V–48V DC input $\rightarrow$ stable 5.0V output)</td>
+                <td>High-voltage step-down converter (36V–48V DC input → 5.0V output)</td>
                 <td><strong>~€1.50</strong></td>
                 <td>
                   <a href="https://www.tinytronics.nl/nl/power/spanningsconverters/step-down-buck" target="_blank" class="vendor-tag">TinyTronics.nl</a>
@@ -455,13 +495,13 @@
     </section>
 
     <!-- Handlebar Button Gestures Section -->
-    <section class="section" id="gestures">
+    <section class="section" id="gestures" style="background: rgba(239, 252, 245, 0.4);">
       <div class="container">
         <div class="section-header">
-          <span class="pill-badge pill-yellow section-tag">ZERO HARDWARE TOGGLE</span>
+          <span class="pill-badge pill-yellow section-tag">ZERO PHONE TOGGLE</span>
           <h2>Handlebar Button &amp; Brake Gestures</h2>
           <p>
-            Switch between Legal Mode (25 km/h) and Unlocked Mode (33 km/h) on the fly using existing bike controls without pulling out your phone.
+            Switch between Legal Mode (25 km/h) and Unlocked Mode (33 km/h) on the fly using stock bike controls without reaching for your phone.
           </p>
         </div>
 
@@ -542,24 +582,22 @@
   </main>
 
   <!-- Footer -->
-  <footer class="footer">
-    <div class="container footer-content">
-      <div class="footer-brand">
-        <img src="assets/logo.svg" alt="TenWayOut" style="width: 24px; height: 24px;">
-        <span>TENWAY<span>OUT</span></span>
-      </div>
-
-      <ul class="footer-links">
-        <li><a href="#overview">Overview</a></li>
-        <li><a href="#architecture">Architecture</a></li>
-        <li><a href="#web-app">Web App</a></li>
-        <li><a href="#wiring">Wiring</a></li>
-        <li><a href="#bom">BOM</a></li>
-        <li><a href="https://github.com" target="_blank">GitHub</a></li>
-      </ul>
-
-      <div class="footer-disclaimer">
-        ⚠️ <strong>Disclaimer:</strong> This hardware and software project is intended strictly for educational, research, and private-property / off-road usage. Compliance with local road traffic regulations (e.g. EU EN 15194) remains the sole responsibility of the rider.
+  <footer>
+    <div>
+      <h2 class="foot-title">Speed unlock<br>for the bikes<br><span class="g">you ride.</span></h2>
+      <p class="foot-mono">© 2026 TENWAYOUT // KIMISHIBA · MIT LICENSE</p>
+    </div>
+    <div style="text-align: right;">
+      <div class="metadata">Navigation &amp; Source</div>
+      <div class="foot-links">
+        <a href="#overview">Overview</a>
+        <a href="#architecture">Architecture</a>
+        <a href="#web-app">Web BLE</a>
+        <a href="#wiring">Wiring</a>
+        <a href="#bom">BOM</a>
+        <a href="#gestures">Gestures</a>
+        <a href="#faq">FAQ</a>
+        <a href="https://github.com/Kimishiba/tenways-cgo800s-mitm" target="_blank">GitHub</a>
       </div>
     </div>
   </footer>
